@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"/>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Daniela's Library</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/add">Add a Book</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/list">List Books</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<h1> This is my list book html page</h1>
+
+<!-- Have to use a for each loop -->
+<div th:each="book : ${bookslist}">
+    <p th:inline="text">Title: [[${book.title}]]</p>
+    <p th:inline="text">Author: [[${book.author}]]</p>
+    <p th:inline="text">Publication year: [[${book.pubYear}]]</p>
+    <p th:inline="text">ISBN number: [[${book.isbnNumber}]]</p>
+    <!--<p th:inline="text">Book availability: [[${book.available}]]</p>-->
+    <p th:text="${book.available} ? 'This book can be borrowed' : 'This book is currently checked out.'"></p>
+    <!-- anchor tag below (a) allows you to click on it   need a curly brace for all thymeleaf objects-->
+    <!-- if the book is available, then you can borrow book, if not, return  -->
+    <a th:text="${book.available}? 'Borrow Book' : 'Return Book'" th:href="@{/changestatus/{id}(id=${book.id})}"></a>
+    <span><a th:href="@{/update/{id}(id=${book.id})}">Update</a></span>
+    <span><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></span>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Daniela's Library</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/add">Add a Book</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/list">List Books</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<h1> This is my add book html page </h1>
+
+<!-- $ means object accessing   -->
+<!-- th:action is what happens after I press submit - so where are you putting the data? path is save-->
+<!-- model.addAttribute("aBook," new Book()); the "aBook" goes into the tg: object below - reference needs to match where reference is located  -->
+<form action="#" th:action="@{/save}" th:object="${aBook}" method="post">
+
+    <input type="hidden" th:field="*{id}"/><br/>
+
+    <!-- asterisk is accessing variables inside of that object -->
+    Title: <input type="text" th:field="*{title}"/><br/>
+    Author: <input type="text" th:field="*{author}"/><br/>
+    Publication year: <input type="text" th:field="*{pubYear}"/><br/>
+    ISBN number: <input type="text" th:field="*{isbnNumber}"/><br/>
+    <input type="submit" value="Submit"/>
+
+
+</form>
+
+
+</body>
+</html>
